@@ -7,7 +7,13 @@ $body = json_decode($json_body, true);
 $data = [];
 
 if (isset($body['endpoint'])) {
-  $path = 'storage/endpoints.dat';
+  if (getenv('PHP_ENV') === 'heroku') {
+    $path = '/tmp/web-push/endpoints.dat';
+    mkdir(dirname($path));
+
+  } else {
+    $path = 'storage/endpoints.dat';
+  }
 
   if (is_writable(dirname($path))) {
     file_put_contents($path, $body['endpoint'] . PHP_EOL, FILE_APPEND);
