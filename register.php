@@ -2,13 +2,15 @@
 ini_set('display_errors', '1');
 ini_set('error_reporting', E_ALL);
 
+$json_body = file_get_contents('php://input');
+$body = json_decode($json_body, true);
 $data = [];
 
-if (isset($_POST['endpoint'])) {
+if (isset($body['endpoint'])) {
   $path = 'storage/endpoints.dat';
 
   if (is_writable($path)) {
-    file_put_contents($path, $_POST['endpoint'] . PHP_EOL, FILE_APPEND);
+    file_put_contents($path, $body['endpoint'] . PHP_EOL, FILE_APPEND);
 
     $data = [
       'status' => 201

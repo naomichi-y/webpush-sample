@@ -9,7 +9,7 @@ $path = 'storage/endpoints.dat';
 if (file_exists($path)) {
   $lines = file($path, FILE_IGNORE_NEW_LINES);
   $headers = [
-    'Authorization: ' . SERVER_KEY,
+    'Authorization: key=' . SERVER_KEY,
     'Content-Type: application/json'
   ];
   $targets = [];

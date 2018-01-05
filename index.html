@@ -4,26 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <link rel="manifest" href="/manifest.json">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-      var registerSubscription = function(subscription) {
-        if (subscription) {
-          $.post('register.php', { endpoint: subscription.endpoint });
-        }
-      };
-
-      navigator.serviceWorker.ready.then(function(sw) {
-        sw.pushManager.getSubscription().then(function(subscription) {
-          if (subscription === null) {
-            sw.pushManager.subscribe({ userVisibleOnly: true }).then(registerSubscription);
-          }
-        });
-      });
-
-      navigator.serviceWorker.register('/service-worker.js').then();
-    </script>
   </head>
   <body>
     <h1>Web push sample</h1>
+    <script src="/index.js"></script>
   </body>
 </html>
