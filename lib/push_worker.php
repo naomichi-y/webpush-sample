@@ -2,7 +2,7 @@
 ini_set('display_errors', '1');
 ini_set('error_reporitng', E_ALL);
 
-define('SERVER_KEY', '{YOUR_SERVER_KEY}');
+define('SERVER_KEY', getenv('SERVER_KEY'));
 
 $path = 'storage/endpoints.dat';
 
