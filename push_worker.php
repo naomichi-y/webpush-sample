@@ -5,6 +5,7 @@ ini_set('error_reporitng', E_ALL);
 define('SERVER_KEY', getenv('SERVER_KEY'));
 
 $path = 'storage/endpoints.dat';
+$data = [];
 
 if (file_exists($path)) {
   $lines = file($path, FILE_IGNORE_NEW_LINES);
@@ -34,7 +35,13 @@ if (file_exists($path)) {
   $response = curl_exec($curl);
   curl_close($curl);
 
-  echo $response;
+  $data = [
+    'status' => 201,
+    'message' => $response
+  ];
+
 } else {
   echo "Endpoints does not exist.\n";
 }
+
+echo json_encode($data);

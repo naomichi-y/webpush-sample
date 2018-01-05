@@ -1,3 +1,5 @@
+var message = document.querySelector('#message');
+
 navigator.serviceWorker.ready.then(function(serviceWorker) {
   serviceWorker.pushManager.getSubscription().then(function(subscription) {
     if (subscription === null) {
@@ -12,17 +14,17 @@ navigator.serviceWorker.ready.then(function(serviceWorker) {
           body: JSON.stringify({ endpoint: subscription.endpoint })
         }).then(function(response) {
           return response.json();
-        }).then(function (json) {
+        }).then(function(json) {
           if (json.status === 201) {
-            alert('Successful registration to Service worker.');
+            message.innerText = 'Successful registration to Service worker.';
           } else {
-            alert(json.errors[0].message);
+            message.innerText = json.errors[0].message;
           }
         }).catch(function(err) {
-          alert(err);
+          message.innerText = err;
         });
       }).catch(function(err) {
-        alert(err);
+        message.innerText = err;
       });
     }
   });
@@ -32,8 +34,26 @@ navigator.serviceWorker.register('/service-worker.js').then(function() {
   Notification.requestPermission();
 
   if (Notification.permission === 'denied') {
-    alert('Notification is denied.');
+    message.innerText = 'Notification is denied.';
   } else if (Notification.permission === 'granted') {
-    alert('Notification is allowed.');
+    message.innerText = 'Notification is allowed.';
   }
+});
+
+var pushNotification = document.querySelector('#push_notification');
+
+pushNotification.addEventListener('click', function() {
+  fetch('/push_worker.php', {
+    method: 'POST'
+  }).then(function(response) {
+    return response.json();
+  }).then(function(json) {
+    if (json.status === 201) {
+      message.innerText = json.message;
+    } else {
+      message.innerText = json.errors[0].message;
+    }
+  }).catch(function(err) {
+    message.innerText = err;
+  });
 });
