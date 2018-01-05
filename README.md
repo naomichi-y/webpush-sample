@@ -10,7 +10,7 @@ GCM_SENDER_ID=xxx SERVER_KEY=xxx php -S localhost:8080
 
 ## Verified browser
 
-###Desktop
+### Desktop
 * Chrome 63
 
 ### Mobile
