@@ -9,7 +9,7 @@ $data = [];
 if (isset($body['endpoint'])) {
   $path = 'storage/endpoints.dat';
 
-  if (is_writable($path)) {
+  if (is_writable(dirname($path))) {
     file_put_contents($path, $body['endpoint'] . PHP_EOL, FILE_APPEND);
 
     $data = [
