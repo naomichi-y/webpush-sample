@@ -16,7 +16,7 @@ if (file_exists($path)) {
   $targets = [];
 
   foreach ($lines as $line) {
-    // Support chrome
+    // Support GCM  (Simple Push is not implemented yet...)
     preg_match('/\/gcm\/send\/(.+)/', $line, $matches);
 
     if (isset($matches[1])) {
